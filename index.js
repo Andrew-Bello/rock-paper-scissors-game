@@ -26,26 +26,3 @@ function getComputerChoice() {
     }
     console.log(randomInput);
 }
-
-function getPlayerChoice() {
-    let playerChoice = prompt('Let\'s play Rock, Paper, Scissors').toLowerCase()
-    if (playerChoice !== 'rock' && 'paper' && 'scissors') {
-        playerChoice = prompt('Please enter valid choice')
-    }
-    return playerChoice;
-}
-
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
-
-function playRound(player, computer) {
-    if (player === 'rock' && computer === 'scissors') {
-        console.log('You win this round')
-    } else if (player === 'paper' && computer === 'rock') {
-        console.log('You win this round')
-    } else if (player === 'scissors' && computer === 'paper') {
-        console.log('You win this round')
-    }
-}
-
-console.log(playRound(playerSelection, computerSelection));
