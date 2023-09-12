@@ -10,9 +10,7 @@
 
 function getComputerChoice() {
     let randomInput = Math.floor(Math.random() * 3 + 1);
-    
-    console.log(randomInput);
-    
+
     switch (randomInput) {
         case 1:
            randomInput = 'rock';
@@ -24,5 +22,37 @@ function getComputerChoice() {
             randomInput = 'scissors'
             break;    
     }
-    console.log(randomInput);
+    return randomInput;
 }
+
+const playerSelection = 'scissors';
+const computerSelection = getComputerChoice();
+
+console.log(computerSelection)
+console.log(playerSelection);
+
+function playRound(getPlayerSelection, getComputerSelection) {
+    let message; 
+    if (getPlayerSelection === 'rock' && getComputerSelection === 'scissors') {
+        message = 'You win this round, rock beats scissors.'
+    } else if (getPlayerSelection === 'paper' && getComputerSelection === 'rock') {
+        message = 'You win this round, paper beats rock.'
+    } else if (getPlayerSelection === 'scissors' && getComputerSelection === 'paper') {
+        message = 'You win this round, scissors beats paper.'
+    } else if (getPlayerSelection === 'rock' && getComputerSelection === 'paper') {
+        message = 'You Lose this round, paper beats rock.'
+    } else if (getPlayerSelection === 'paper' && getComputerSelection === 'scissors') {
+        message = 'You lose this round, scissors beats paper.'
+    } else if (getPlayerSelection === 'scissors' && getComputerSelection === 'rock') {
+        message = 'You lose this round, rock beats scissors.'
+    } else {
+        message = 'You draw this round, try again.'
+    }
+
+    return message;
+}
+
+console.log(computerSelection)
+console.log(playerSelection);
+
+console.log(playRound(playerSelection, computerSelection));
