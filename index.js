@@ -25,7 +25,7 @@ function getComputerChoice() {
     return randomInput;
 }
 
-const playerSelection = 'scissors';
+const playerSelection = prompt('Please enter rock, paper or scissors.').toLowerCase();
 const computerSelection = getComputerChoice();
 
 console.log(computerSelection)
