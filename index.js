@@ -1,10 +1,15 @@
-// Rock paper scissors game. Needs to take two inputs, one from the computer and one from the user.
-    // Create a function that takes the computer's input
-    // Computer input has to be completely random
-    // Create player input function 
-    // Create a function that does one round of RPS
+let playerCount  = 0;
+let computerCount = 0;
 
-// Rock > Scissors | Scissors > Paper | Paper > Rock | Everything else is a draw
+const buttons = document.querySelectorAll('#rps-btn');
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        playRound(button.value);
+    })
+})
+
+
 
 
 
@@ -25,34 +30,36 @@ function getComputerChoice() {
     return randomInput;
 }
 
-const playerSelection = prompt('Please enter rock, paper or scissors.').toLowerCase();
-const computerSelection = getComputerChoice();
 
-console.log(computerSelection)
-console.log(playerSelection);
+function playRound(playerSelection) {
+    let computerSelection = getComputerChoice();
+    let message = '';
 
-function playRound(getPlayerSelection, getComputerSelection) {
-    let message; 
-    if (getPlayerSelection === 'rock' && getComputerSelection === 'scissors') {
+    if(playerSelection === 'rock' && computerSelection === 'scissors') {
         message = 'You win this round, rock beats scissors.'
-    } else if (getPlayerSelection === 'paper' && getComputerSelection === 'rock') {
-        message = 'You win this round, paper beats rock.'
-    } else if (getPlayerSelection === 'scissors' && getComputerSelection === 'paper') {
-        message = 'You win this round, scissors beats paper.'
-    } else if (getPlayerSelection === 'rock' && getComputerSelection === 'paper') {
-        message = 'You Lose this round, paper beats rock.'
-    } else if (getPlayerSelection === 'paper' && getComputerSelection === 'scissors') {
-        message = 'You lose this round, scissors beats paper.'
-    } else if (getPlayerSelection === 'scissors' && getComputerSelection === 'rock') {
-        message = 'You lose this round, rock beats scissors.'
+        playerCount++;
+    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        message = 'You win this round, paper beats rock.';
+        playerCount++;
+    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        message = 'You win this round, scissors beats paper.';
+        playerCount++;
+    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+        message = 'You Lose this round, paper beats rock.';
+        computerCount++;
+    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        message = 'You lose this round, scissors beats paper.';
+        computerCount++;
+    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        message = 'You lose this round, rock beats scissors.';
+        computerCount++;
     } else {
         message = 'You draw this round, try again.'
     }
 
-    return message;
+    if(playerCount === 5) message = 'Game over you win!';
+    if(computerCount === 5) message = 'Game over you lose!';
+    console.log(message);
+    console.log(playerCount);
+    console.log(computerCount);
 }
-
-console.log(computerSelection)
-console.log(playerSelection);
-
-console.log(playRound(playerSelection, computerSelection));
