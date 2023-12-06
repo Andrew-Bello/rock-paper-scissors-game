@@ -2,6 +2,10 @@ let playerCount  = 0;
 let computerCount = 0;
 
 const buttons = document.querySelectorAll('#rps-btn');
+const newMessage = document.querySelector('.message');
+const divSelection = document.querySelector('.results-container')
+const playerScore = document.querySelector('.player-score')
+const computerScore = document.querySelector('.computer-score');
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -9,8 +13,17 @@ buttons.forEach(button => {
     })
 })
 
-
-
+function createSaButton() {
+    const saButton = document.createElement('button');
+    saButton.textContent = 'Start Again?'
+    divSelection.append(saButton)
+    saButton.addEventListener('click', () => {
+        playerCount = 0;
+        computerCount = 0;
+        saButton.remove();
+    })
+    return saButton;
+}
 
 
 function getComputerChoice() {
@@ -33,33 +46,47 @@ function getComputerChoice() {
 
 function playRound(playerSelection) {
     let computerSelection = getComputerChoice();
-    let message = '';
 
+    if (computerSelection === playerSelection){
+        newMessage.textContent = 'You draw this round, try again.'
+    }
     if(playerSelection === 'rock' && computerSelection === 'scissors') {
-        message = 'You win this round, rock beats scissors.'
+        newMessage.textContent = 'You win this round, rock beats scissors.'
         playerCount++;
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        message = 'You win this round, paper beats rock.';
+    } 
+    if (playerSelection === 'paper' && computerSelection === 'rock') {
+        newMessage.textContent = 'You win this round, paper beats rock.';
         playerCount++;
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        message = 'You win this round, scissors beats paper.';
+    }
+    if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        newMessage.textContent = 'You win this round, scissors beats paper.';
         playerCount++;
-    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        message = 'You Lose this round, paper beats rock.';
+    }
+    if (playerSelection === 'rock' && computerSelection === 'paper') {
+        newMessage.textContent = 'You Lose this round, paper beats rock.';
         computerCount++;
-    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        message = 'You lose this round, scissors beats paper.';
+    }
+    if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        newMessage.textContent = 'You lose this round, scissors beats paper.';
         computerCount++;
-    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        message = 'You lose this round, rock beats scissors.';
+    }
+    if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        newMessage.textContent = 'You lose this round, rock beats scissors.';
         computerCount++;
-    } else {
-        message = 'You draw this round, try again.'
     }
 
-    if(playerCount === 5) message = 'Game over you win!';
-    if(computerCount === 5) message = 'Game over you lose!';
-    console.log(message);
+    if(playerCount === 5) {
+        newMessage.textContent = 'Game over you win! Let\'s go again!';
+        createSaButton()
+    } 
+    if(computerCount === 5) {
+        newMessage.textContent = 'Game over you lose! Try again?';
+        createSaButton()
+    }
+    
+    playerScore.textContent = playerCount;
+    computerScore.textContent = computerCount;
+
     console.log(playerCount);
     console.log(computerCount);
 }
