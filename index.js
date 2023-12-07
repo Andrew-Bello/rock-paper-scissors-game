@@ -13,14 +13,22 @@ buttons.forEach(button => {
     })
 })
 
+if(playerCount === 1) {
+    buttons.disabled = true;
+}
+
 function createSaButton() {
     const saButton = document.createElement('button');
     saButton.textContent = 'Start Again?'
+    saButton.style.marginTop = '30px'
     divSelection.append(saButton)
     saButton.addEventListener('click', () => {
         playerCount = 0;
         computerCount = 0;
+        playerScore.textContent = playerCount;
         saButton.remove();
+        computerScore.textContent = computerCount;
+        buttons.forEach(e => e.disabled = false)
     })
     return saButton;
 }
@@ -63,30 +71,30 @@ function playRound(playerSelection) {
         playerCount++;
     }
     if (playerSelection === 'rock' && computerSelection === 'paper') {
-        newMessage.textContent = 'You Lose this round, paper beats rock.';
+        newMessage.textContent = 'You Lose this round, computer chose paper.';
         computerCount++;
     }
     if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        newMessage.textContent = 'You lose this round, scissors beats paper.';
+        newMessage.textContent = 'You lose this round, computer chose scissors.';
         computerCount++;
     }
     if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        newMessage.textContent = 'You lose this round, rock beats scissors.';
+        newMessage.textContent = 'You lose this round, computer chose rock.';
         computerCount++;
     }
 
     if(playerCount === 5) {
         newMessage.textContent = 'Game over you win! Let\'s go again!';
+        buttons.forEach(e => e.disabled = true);
         createSaButton()
+        
     } 
     if(computerCount === 5) {
-        newMessage.textContent = 'Game over you lose! Try again?';
+        newMessage.textContent = 'HAAHAA  SWORE LOSER! Try again';
+        buttons.forEach(e => e.disabled = true);
         createSaButton()
     }
     
     playerScore.textContent = playerCount;
     computerScore.textContent = computerCount;
-
-    console.log(playerCount);
-    console.log(computerCount);
 }
