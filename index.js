@@ -13,10 +13,6 @@ buttons.forEach(button => {
     })
 })
 
-if(playerCount === 1) {
-    buttons.disabled = true;
-}
-
 function createSaButton() {
     const saButton = document.createElement('button');
     saButton.textContent = 'Start Again?'
